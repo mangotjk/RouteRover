@@ -3,9 +3,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Basic Struts 2 Application - Welcome</title>
+    <title>Route Rover Main Page</title>
   </head>
   <body>
-    <h1>Welcome To Struts 2!</h1>
+    <h1>Welcome To Route Rover!</h1>
+    <h2>Creators: JK, </h2>
   </body>
 </html>
