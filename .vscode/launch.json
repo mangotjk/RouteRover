@@ -2,9 +2,9 @@
     "configurations": [
         {
             "type": "chrome",
-            "name": "http://localhost:8080/routerover/index.jsp",
+            "name": "http://localhost:8080/routerover/index.action",
             "request": "launch",
-            "url": "http://localhost:8080/routerover/index.jsp"
+            "url": "http://localhost:8080/routerover/index.action"
         }
     ]
 }
