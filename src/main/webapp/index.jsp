@@ -7,6 +7,6 @@
   </head>
   <body>
     <h1>Welcome To Route Rover!</h1>
-    <h2>Creators: JK,  </h2>
+    <h2>Creators: JK, Darius, </h2>
   </body>
 </html>
