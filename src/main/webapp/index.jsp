@@ -7,11 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Route Rover Main Page</title>
   </head>
-  <body bgColor=""lightBlue">
+    <body bgColor="lightBlue">
     <h1>Welcome To Route Rover!</h1>
     <h2>Creators: jk, [add your names], </h2>
 
     <p><a href="<s:url action='hello'/>">Hello World</a></p>
+    <p><a href="<s:url action='map'/>">map</a></p>
+    <p><a href="<s:url action='mapSearch'/>">mapSearch</a></p>
 
     <s:form action="Login">
         <s:textfield name="userName" label="User Name" placeholder="enter 'Bob123' to login"/>
