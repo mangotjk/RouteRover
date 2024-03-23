@@ -28,6 +28,11 @@
         <action name="mapSearch" class="authentication.mapSearch" method="execute">
             <result>/mapSearch.jsp</result>
         </action>
+
+        <action name="myruns" class="myRuns.MyRuns" method="execute">
+            <result>/myRuns.jsp</result>
+        </action>
+
     </package>
 
 </struts>
