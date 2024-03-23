@@ -14,6 +14,7 @@
     <p><a href="<s:url action='hello'/>">Hello World</a></p>
     <p><a href="<s:url action='map'/>">map</a></p>
     <p><a href="<s:url action='mapSearch'/>">mapSearch</a></p>
+    <p><a href="<s:url action='myruns'/>">My Runs</a></p>
 
     <s:form action="Login">
         <s:textfield name="userName" label="User Name" placeholder="enter 'Bob123' to login"/>
