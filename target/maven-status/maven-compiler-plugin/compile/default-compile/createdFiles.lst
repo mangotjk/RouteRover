@@ -1,4 +1,8 @@
 authentication\map.class
+authentication\mapSearch.class
 authentication\Login.class
 authentication\MessageStore.class
+myRuns\Run.class
 authentication\HelloWorldAction.class
+myRuns\Feedback.class
+myRuns\MyRuns.class

@@ -41,8 +41,7 @@
         <span style="float: right;"> Share | Favourite </span></h3>
         <br>
         <p> wanted to do 5k at first but did 10 instead :p </p>
-        <h2><button>Rate this run!</button></h2>
-
+        <h2><a href="<s:url action='feedback'/>"> Rate this run!</a></h2>
         <br>
 
         <h2>

@@ -33,6 +33,15 @@
             <result>/myRuns.jsp</result>
         </action>
 
+        <action name="feedback">
+            <result>/feedbackPage.jsp</result>
+        </action>
+
+        <action name="feedbackSubmit" class="myRuns.Feedback" >
+            <result name="success">/myRuns.jsp</result>
+            <result name="input">/feedbackPage.jsp</result>
+        </action>
+
     </package>
 
 </struts>
