@@ -1,0 +1,45 @@
+// MEDIA QUERIES
+@mixin respond($breakpoint) {
+  // use em for breakpoints
+  @if $breakpoint == phone-sm {
+    // 1em = 16px
+    // <= 450px
+    @media only screen and (width<= 28.125em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == phone {
+    // <= 600px
+    @media only screen and (width<= 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    // <= 900px
+    @media only screen and (width<= 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    // <= 1200px
+    @media only screen and (width<= 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desktop {
+    // >= 1800px
+    @media only screen and (width>= 112.5em) {
+      @content;
+    }
+  }
+}
+
+@mixin centerFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

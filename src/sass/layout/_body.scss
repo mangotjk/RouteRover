@@ -1,0 +1,41 @@
+.body {
+  background-image: url('../img/background4.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(max-content, 20dvw) 1fr;
+  height: 100dvh;
+}
+
+.main__content {
+}
+
+.container {
+  position: relative;
+  padding: 2rem;
+  max-height: 100dvh;
+  overflow: hidden;
+
+  &--home {
+    max-height: 55rem;
+    margin: 1rem 0;
+  }
+
+  &--scrollable {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.map__container {
+  padding: 1rem;
+}
+#map {
+  border-radius: 2rem;
+  height: 100%;
+  // border: solid 2px $font-color-default;
+}
