@@ -1,0 +1,40 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  // defines what 1rem is
+  font-size: 90%;
+
+  @include respond(tab-land) {
+    font-size: 80%;
+  }
+  @include respond(tab-port) {
+    font-size: 70%;
+  }
+  @include respond(phone) {
+    font-size: 60%;
+  }
+  @include respond(phone-sm) {
+    font-size: 50%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  font-family: $font-family-default;
+  font-weight: 400;
+  line-height: 1.6;
+  color: $font-color-default;
+
+  max-height: 100dvh;
+}
+
+::selection {
+  background-color: $primary;
+  color: #fff;
+}

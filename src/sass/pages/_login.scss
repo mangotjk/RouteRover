@@ -1,0 +1,66 @@
+.login {
+  width: 80dvw;
+  max-width: 30rem;
+  height: 70dvh;
+  max-height: 30rem;
+  border: solid 1px #000;
+  border-radius: 3rem;
+
+  color: #000;
+
+  padding: $spacing * 2 $spacing * 3;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: $shadow-light;
+
+  &__wrapper {
+    @include centerFlex;
+    height: 100dvh;
+    background-image: url('../img/background4.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  label {
+    padding-left: 0.5rem;
+    font-size: 0.9rem;
+    color: $font-color-default;
+    transform: translateX(4rem);
+    opacity: 0;
+    transition: all 0.5s;
+
+    &.active {
+      transform: none;
+      opacity: 1;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: $spacing $spacing * 0.7;
+    border-radius: 0.3rem;
+    border: none;
+
+    &::placeholder {
+      font-family: inherit;
+    }
+  }
+
+  h1 {
+    font-size: $font-xl;
+    margin-bottom: $spacing * 1;
+    text-align: center;
+  }
+
+  .anchor {
+    &__wrapper {
+      text-align: left;
+    }
+    &:link,
+    &:visited {
+      font-size: $font-xs;
+      color: $font-color-default;
+    }
+  }
+}

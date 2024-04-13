@@ -1,0 +1,38 @@
+.nav {
+  &__list {
+    list-style: none;
+    width: 100%;
+  }
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 0.8rem;
+    }
+    &--active {
+      border: 2px solid currentColor;
+      border-radius: 200px;
+    }
+    border: 2px solid transparent;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    align-items: center;
+    justify-items: start;
+    justify-content: center;
+    column-gap: 1.7rem;
+
+    padding: 1rem;
+  }
+  &__link {
+    text-decoration: none;
+    color: #fff;
+    font-size: $font-lg;
+  }
+  &__icon {
+    height: $font-lg;
+    width: $font-lg;
+    margin-right: 1rem;
+
+    margin-left: 1rem;
+
+    fill: currentColor;
+  }
+}

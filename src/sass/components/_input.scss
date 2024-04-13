@@ -1,0 +1,110 @@
+.form {
+  display: grid;
+  grid-template-rows: repeat(3, min-content) 1fr min-content;
+
+  &--custom {
+    padding: $spacing * 2;
+    border: solid 1px currentColor;
+    border-radius: 1rem;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.user-input {
+  text-indent: 1rem;
+  &__search-btn {
+    padding: 0.5rem;
+    font-size: $font-md;
+  }
+  &__area {
+    height: 2rem;
+  }
+  &__result {
+    min-height: 20rem;
+    border: currentColor 1px solid;
+    border-radius: 2rem;
+    padding: $spacing 0;
+    margin-bottom: $spacing * 2;
+
+    &__option {
+      text-indent: $spacing;
+      margin-bottom: $spacing * 0.5;
+      cursor: pointer;
+
+      &--active {
+        color: $blue;
+      }
+    }
+
+    &__icon {
+      @extend %icon;
+      fill: currentColor;
+    }
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    &--radio {
+      display: inline-block;
+      border: 1px solid $font-color-default;
+      border-radius: 2px;
+      padding: $spacing * 0.3 $spacing;
+      transform: translateY(-50%);
+    }
+  }
+  &__setting {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(4, 1fr);
+    column-gap: 2rem;
+
+    margin-bottom: $spacing * 0.5;
+
+    input[type='range'] {
+      --track-height: 0.1rem;
+
+      height: var(--track-height);
+      color: $primary;
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+
+      &::-webkit-slider-thumb,
+      &::-moz-range-thumb {
+        background: $primary;
+        color: $primary;
+        width: 0.5rem;
+        -webkit-appearance: none;
+        height: var(--thumb-height);
+      }
+    }
+    #user-input__rating {
+      direction: rtl;
+    }
+  }
+  &__input {
+    &--radio {
+      display: none;
+      &:checked {
+        + .user-input__label--radio {
+          background-color: $secondary;
+          color: #fff;
+          border: 1px solid transparent;
+        }
+      }
+    }
+  }
+
+  &__search-btn {
+    background-color: $secondary;
+    color: #fff;
+  }
+}

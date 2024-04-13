@@ -1,0 +1,29 @@
+.main__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  .content {
+    padding: 1.7rem 2dvw 3rem;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $spacing;
+      align-items: center;
+    }
+  }
+
+  #btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+.leaflet-right {
+  display: none;
+}
