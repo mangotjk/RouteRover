@@ -1,0 +1,187 @@
+#routes {
+  max-height: 100%;
+}
+
+.route {
+  border-radius: 2rem;
+  background-color: $secondary-light;
+  padding: 1rem 2rem;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+
+  &__hidden-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 0;
+    overflow: hidden;
+
+    &.show {
+      height: auto;
+    }
+  }
+
+  &__leaderboard {
+    display: block;
+    width: 60%;
+    height: auto;
+    transition: all 0.5s ease-in-out;
+    list-style: none;
+    align-self: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+
+    text-align: center;
+    // margin-top: -100%;
+
+    &__header {
+      text-decoration: underline;
+      text-align: center;
+      margin-bottom: $spacing * 0.5;
+    }
+
+    li {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.3rem;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__img {
+    width: 150px;
+    height: 150px;
+    object-position: center;
+    border-radius: 50%;
+    max-width: 100%;
+    max-height: 100%;
+
+    &--small {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  &__heading {
+    text-align: center;
+  }
+  &__content {
+    display: grid;
+    place-items: end;
+  }
+  &__item {
+    align-items: center;
+    &__wrapper {
+      display: block;
+    }
+    &--bold {
+      font-weight: 500;
+    }
+    &__details {
+      font-size: $font-md;
+      display: inline-block;
+      color: $font-color-default;
+      font-weight: 400;
+    }
+    &__icon {
+      @extend %icon;
+      fill: $tertiary;
+
+      &--tool {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &--browse-result,
+  &--my-run {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing * 2;
+
+    .route {
+      &__header {
+        display: flex;
+        justify-content: space-between;
+      }
+      &__left {
+        margin-left: $spacing * 2;
+      }
+      &__content {
+        display: flex;
+        justify-content: center;
+        gap: $spacing;
+      }
+      &__item {
+        &__details {
+          font-size: $font-sm;
+        }
+        &__icon {
+          margin-right: $spacing * 0.2;
+
+          &--blue {
+            fill: $blue;
+          }
+        }
+      }
+
+      &__comment {
+        height: 100%;
+        max-width: 100%;
+        margin: 0 1rem $spacing;
+        overflow-x: scroll;
+        display: flex;
+        gap: $spacing;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        &__box {
+          border: solid 1px currentColor;
+          border-radius: 0.2rem;
+          display: inline-block;
+          padding: 5px $spacing $spacing;
+          min-width: max-content;
+        }
+        &__text {
+          margin-top: $spacing * 0.5;
+        }
+
+        .comment__header {
+          display: flex;
+          align-items: center;
+
+          img {
+            margin-right: 1rem;
+          }
+
+          p {
+            align-items: center;
+          }
+        }
+      }
+    }
+    .rating {
+      margin-top: -0.5rem;
+      margin-bottom: $spacing;
+    }
+  }
+
+  &--my-run {
+    .route {
+      &__comment {
+        width: 100%;
+        .rating {
+          margin-top: $spacing * 0.25;
+        }
+      }
+    }
+  }
+}

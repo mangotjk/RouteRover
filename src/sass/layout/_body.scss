@@ -1,0 +1,75 @@
+.body {
+  background-image: url('../img/background4.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(max-content, 20dvw) 1fr;
+  height: 100dvh;
+}
+
+.leaflet-right {
+  display: none;
+}
+
+.main__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  height: 100dvh;
+
+  &--custom {
+    grid-template-columns: 40rem 1fr;
+  }
+
+  .content {
+    padding: 1.7rem 2dvw 3rem;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $spacing;
+      align-items: center;
+    }
+  }
+
+  #btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+.container {
+  position: relative;
+  padding: 2rem;
+  height: 100%;
+
+  &--stats {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: $spacing * 2;
+    height: 30rem;
+  }
+
+  &--scrollable {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.map__container {
+  padding: 1rem;
+}
+#map {
+  border-radius: 2rem;
+  height: 100%;
+  // border: solid 2px $font-color-default;
+}

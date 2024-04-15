@@ -1,0 +1,47 @@
+$primary-light: #f2f7f0;
+$primary: #aace9c;
+$primary-dark: #a9b8a4;
+
+$secondary-light: #cbe0d5;
+$secondary: #529873;
+$secondary-dark: #00524c;
+
+$tertiary-light: #4abdac;
+$tertiary: #fff;
+$tertiary-dark: #28b485;
+
+$blue: #5391fe;
+$purple: #766df4;
+
+$font-color-default: #777;
+$font-color-hero: #eee;
+
+$font-family-default: 'Poppins', sans-serif;
+$font-family-display: 'Lato', sans-serif;
+
+// FONT SIZE
+$font-xs: 0.833rem;
+$font-sm: 1rem;
+$font-md: 1.2rem;
+$font-lg: 1.563rem;
+$font-xl: 2.488rem;
+$font-xxl: 2.986rem;
+
+$shadow-light: 0.2rem 1rem 2rem rgba(0, 0, 0, 0.2);
+$shadow-medium: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.4);
+$shadow-dark: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.5);
+
+// BREAKPOINTS
+// 1800px
+$bp-desktop: 112.5em;
+// 1200px
+$bp-tab-land: 75em;
+// 992px
+$bp-tab-port: 62em;
+// 576px
+$bp-phone: 36em;
+// 450px
+$bp-phone-sm: 28.125em;
+
+// UTILITIES
+$spacing: 1rem;
