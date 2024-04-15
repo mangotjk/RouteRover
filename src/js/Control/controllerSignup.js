@@ -31,6 +31,10 @@ class ControllerSignup extends Controller {
    * @private
    */
   async _handleSignup(enteredEmail, enteredPassword) {
+    if (enteredEmail.trim() === '' || enteredPassword.trim() === '') {
+      window.alert('Please enter both email and password');
+      return;
+    }
     try {
       await signupUser(enteredEmail, enteredPassword);
       window.alert('You have successfully signed up');

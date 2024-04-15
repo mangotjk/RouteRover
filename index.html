@@ -8,12 +8,15 @@
     <!-- Always include this line of code!!! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-     <link rel="icon" href="./src/img/logos/main_logo.png" />
-   <!-- <link rel="apple-touch-icon" href="img/apple-touch-icon.png" /> -->
+    <link rel="icon" href="./src/img/logos/main_logo.png" />
+    <!-- <link rel="apple-touch-icon" href="img/apple-touch-icon.png" /> -->
     <!-- <link rel="manifest" href="manifest.webmanifest" /> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="/src/sass/main.scss" />
     <title>Route Rover</title>
@@ -24,16 +27,37 @@
     <section class="login">
       <form class="login__form">
         <h1>Route Rover</h1>
-        <p class="mb-sm"><label for="email" class="login__label">Email</label><input id="email" class="login__input" type="email" placeholder="Email"></p>
-        <p class="mb-xs"><label for="password" class="login__label">Password</label><input id="password" class="login__input" type="password" placeholder="Password"></p>
-        <p class="anchor__wrapper"><a class="anchor" href="./html/home.html" >Forgot password?</a></p>
-        <p class="anchor__wrapper"><a class="anchor" href="./html/signup.html" >Don't have an account? Get Started!</a></p>
-      <button id="loginBtn" class="btn--login btn--round btn">Login</button>
+        <p class="mb-sm">
+          <label for="email" class="login__label">Email</label
+          ><input
+            id="email"
+            class="login__input"
+            type="email"
+            placeholder="Email"
+          />
+        </p>
+        <p class="mb-xs">
+          <label for="password" class="login__label">Password</label
+          ><input
+            id="password"
+            class="login__input"
+            type="password"
+            placeholder="Password"
+          />
+        </p>
+        <p class="anchor__wrapper">
+          <a class="anchor" href="#">Forgot password?</a>
+        </p>
+        <p class="anchor__wrapper">
+          <a class="anchor" href="./html/signup.html"
+            >Don't have an account? Get Started!</a
+          >
+        </p>
+        <button id="loginBtn" class="btn--login btn--round btn">Login</button>
       </form>
-    
+      <div class="d-none">
+        <a href="./html/home.html"></a>
+      </div>
+    </section>
   </body>
 </html>
-
-
-
-

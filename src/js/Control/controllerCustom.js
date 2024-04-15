@@ -23,6 +23,13 @@ class ControllerCustom extends Controller {
    * @private
    */
   _init() {
+    try {
+      getUserID();
+    } catch (err) {
+      window.alert('Please Log In!');
+      location.href = 'index.html';
+    }
+    boundaryCustom.addHandlerLogout(this._handleLogout);
     boundaryCustom.addHandlerDisableFormDefaultSubmit();
     boundaryCustom.addHandlerSubmitSearch(this._handleSubmitSearch);
     boundaryCustom.addhandlerAddNewPoint(this._handleAddNewPoint);
@@ -59,9 +66,11 @@ class ControllerCustom extends Controller {
       alert('Please enter a name for the route');
       return;
     }
-    
+
     if (await checkExistingRouteName(routeName.trim(), getUserName())) {
-      alert('You already have another route with the same name!\nPlease enter another name for the new route');
+      alert(
+        'You already have another route with the same name!\nPlease enter another name for the new route'
+      );
       return;
     }
     routeObj.reviews = [];

@@ -25,6 +25,8 @@ class Map {
   _currentWayPoints;
   /** @type {object} */
   _currentSummary;
+  /** @type {object} */
+  _currentMarker;
 
   /**
    * Initialize the map.
@@ -42,6 +44,17 @@ class Map {
       minZoom: this._minZoom,
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
     }).addTo(this._map);
+  }
+
+  /**
+   * Add a marker to the map at the specified coordinates.
+   * @param {number} lat - The latitude.
+   * @param {number} lng - The longitude.
+   */
+  addMarker(lat, lng) {
+    if (this._currentMarker) this._currentMarker.remove();
+    this._currentMarker = L.marker([lat, lng]).addTo(this._map);
+    this._map.setView([lat, lng], this._locateZoom);
   }
 
   /**
@@ -74,6 +87,10 @@ class Map {
    * @param {Array} waypoints - The waypoints of the route.
    */
   _drawRoute(waypoints) {
+    if (this._currentMarker) {
+      this._currentMarker.remove();
+      this._currentMarker = null;
+    }
     this._currentRoute.setWaypoints(waypoints);
     this._currentWayPoints = waypoints;
     const bounds = new L.LatLngBounds(waypoints);

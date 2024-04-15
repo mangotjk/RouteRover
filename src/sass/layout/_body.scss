@@ -8,18 +8,52 @@
   height: 100dvh;
 }
 
+.leaflet-right {
+  display: none;
+}
+
 .main__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  height: 100dvh;
+
+  &--custom {
+    grid-template-columns: 40rem 1fr;
+  }
+
+  .content {
+    padding: 1.7rem 2dvw 3rem;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $spacing;
+      align-items: center;
+    }
+  }
+
+  #btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &.hidden {
+      display: none;
+    }
+  }
 }
 
 .container {
   position: relative;
   padding: 2rem;
-  max-height: 100dvh;
-  overflow: hidden;
+  height: 100%;
 
-  &--home {
-    max-height: 55rem;
-    margin: 1rem 0;
+  &--stats {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: $spacing * 2;
+    height: 30rem;
   }
 
   &--scrollable {

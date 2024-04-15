@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="description"
-      content="Omnifood is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
+      content="Route Rover. A platform for runners to share and discover routes."
     />
 
     <!-- Always include this line of code!!! -->
@@ -57,36 +57,55 @@
             </li>
           </ul>
         </nav>
-        <a
-          href="../index.html"
-          class="btn btn--secondary btn--round btn--logout"
-          >Log Out</a
-        >
+        <button class="btn btn--secondary btn--round btn--logout" id="logout">
+          Log Out
+        </button>
       </div>
     </sidebar>
 
-    <main class="container">
+    <main class="container container--scrollable">
       <h1 class="h-1">
-        Welcome Back, <span class="user-name" id="user-name">Dummy Name</span>.
+        Welcome Back,
+        <span class="user-name uppercase" id="user-name">Please Log In</span>.
       </h1>
       <h2 class="h-2">Here is what you have accomplished so far!</h2>
-      <section class="container container--scrollable container--home">
-        <div class="content__stats">
-          <label for="total-runs">Total number of runs: </label>
-          <span id="total-runs"></span><br>
-          <label for="total-time">Total time ran: </label>
-          <span id="total-time"></span><br>
-          <label for="total-distance">Total distance ran: </label>
-          <span id="total-distance"></span><br>
-          <label for="avg-speed">Average speed: </label>
-          <span id="avg-speed"></span><br>
-          <label for="fastest-run">Fastest run: </label>
-          <span id="fastest-run"></span><br>
+      <section class="container mb-xl container--stats">
+        <div class="content__stats content__stats--flex window">
+          <div class="content__stats__item content__stats__item--1">
+            <label for="total-runs">Total runs: </label>
+            <strong><span id="total-runs"></span></strong>
+          </div>
+          <div class="content__stats__item content__stats__item--2">
+            <label for="total-time">Running time: </label>
+            <strong><span id="total-time"></span></strong>
+          </div>
+          <div class="content__stats__item content__stats__item--3">
+            <label for="total-distance">Distance ran: </label>
+            <strong><span id="total-distance"></span></strong>
+          </div>
+          <div class="content__stats__item content__stats__item--4">
+            <label for="avg-speed">Avg speed: </label>
+            <strong
+              ><span id="avg-speed" style="white-space: pre"></span
+            ></strong>
+          </div>
+          <div class="content__stats__item content__stats__item--5">
+            <label for="fastest-run">Fastest run: </label>
+            <strong
+              ><span id="fastest-run" style="white-space: pre"></span
+            ></strong>
+          </div>
+        </div>
+
+        <div class="content__stats window">
+          <canvas id="stats-graph"></canvas>
         </div>
       </section>
 
-      <h2 class="h-2">Here are some specially curated routes for you.</h2>
-      <section class="container container--scrollable container--home">
+      <h2 class="h-2 window window--header">
+        Here are some specially curated routes for you.
+      </h2>
+      <section class="container">
         <div class="content__routes"></div>
       </section>
     </main>

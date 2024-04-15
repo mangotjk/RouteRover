@@ -28,10 +28,15 @@ class ControllerBrowse extends Controller {
    * @private
    */
   _init() {
-    boundaryHome.renderName(getUserName());
+    try {
+      boundaryHome.renderName(getUserName());
+    } catch (err) {
+      window.alert('Please Log In!');
+      location.href = 'index.html';
+    }
+    boundaryHome.addHandlerLogout(this._handleLogout);
     updateStats(getUserID());
     boundaryHome.addHandlerRenderAvailableRoutes(this._controlRender);
-    // boundaryHome.render(favRoutes);
     boundaryHome.addHandlerSelectRoute(this._controlSelectRoute);
   }
 
@@ -39,10 +44,10 @@ class ControllerBrowse extends Controller {
    * Control the rendering of available routes.
    * @private
    */
-  _controlRender = async function () {
+  async _controlRender() {
     await retrieveRoutesFromDB();
-    boundaryHome.render(getAllRoutes(HOME_MAX_ROUTES));
-  };
+    await boundaryHome.render(getAllRoutes(HOME_MAX_ROUTES));
+  }
 
   /**
    * Control the selection of a route.

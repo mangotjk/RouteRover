@@ -11,6 +11,18 @@
 
   box-shadow: $shadow-light;
 
+  &--button {
+    font-size: $font-md;
+    padding: 1rem 2rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    margin-bottom: $spacing * 2;
+    box-shadow: $shadow-light;
+    cursor: pointer;
+  }
+
   &--map {
     padding: 1rem;
     height: 100%;

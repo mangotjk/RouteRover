@@ -1,29 +1,17 @@
-.main__content {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  position: relative;
-  .content {
-    padding: 1.7rem 2dvw 3rem;
+#difficulty {
+  font-size: $font-lg;
+  font-family: $font-family-display;
+  font-weight: bold;
 
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: $spacing;
-      align-items: center;
-    }
+  color: green;
+
+  &.med {
+    color: orange;
   }
-
-  #btns {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    &.hidden {
-      display: none;
-    }
+  &.hard {
+    color: red;
   }
-}
-
-.leaflet-right {
-  display: none;
+  &.expert {
+    color: purple;
+  }
 }

@@ -3,9 +3,7 @@
 }
 
 .route {
-  // border: 2px solid $secondary;
   border-radius: 2rem;
-  // background-image: url('../../img/route/alex-siale-qH36EgNjPJY-unsplash.jpg');
   background-color: $secondary-light;
   padding: 1rem 2rem;
   width: 100%;
@@ -58,9 +56,17 @@
   }
 
   &__img {
-    max-width: 150px;
+    width: 150px;
+    height: 150px;
+    object-position: center;
     border-radius: 50%;
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+
+    &--small {
+      width: 50px;
+      height: 50px;
+    }
   }
   &__heading {
     text-align: center;
@@ -141,11 +147,24 @@
           border: solid 1px currentColor;
           border-radius: 0.2rem;
           display: inline-block;
-          padding: 0 $spacing $spacing;
+          padding: 5px $spacing $spacing;
           min-width: max-content;
         }
         &__text {
           margin-top: $spacing * 0.5;
+        }
+
+        .comment__header {
+          display: flex;
+          align-items: center;
+
+          img {
+            margin-right: 1rem;
+          }
+
+          p {
+            align-items: center;
+          }
         }
       }
     }

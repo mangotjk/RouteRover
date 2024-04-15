@@ -8,6 +8,7 @@ import {
   findRouteByID,
   addNewReview,
   state,
+  getCurrentRoute,
   updateState,
   retrieveRoutesFromDB,
   clearCurrentRoute,
@@ -35,6 +36,13 @@ class ControllerBrowse extends Controller {
    * @private
    */
   _init() {
+    try {
+      getUserID();
+    } catch (err) {
+      window.alert('Please Log In!');
+      location.href = 'index.html';
+    }
+    boundaryBrowse.addHandlerLogout(this._handleLogout);
     this._initDialog();
     if (state.currentRoute) {
       const stateRoute = state.currentRoute;
@@ -48,9 +56,10 @@ class ControllerBrowse extends Controller {
     }
 
     boundaryBrowse.renderAvailableLocations(locations);
-    boundaryBrowse.addHandlerSelectLocation();
+    boundaryBrowse.addHandlerSelectLocation(this._handleSelectLocation);
     boundaryBrowse.addHandlerSubmitSearch(this._handleSubmitSearch);
     boundaryBrowse.addHandlerSelectRoute(this._controlSelectRoute);
+    boundaryBrowse.addHandlerLoadAllRoutes(this._handleLoadAllRoutes);
   }
 
   /**
@@ -59,13 +68,16 @@ class ControllerBrowse extends Controller {
    */
   _initDialog() {
     boundaryDialog.init();
-    boundaryBrowse.addHandlerLoadAllRoutes(this._handleLoadAllRoutes);
     boundaryDialog.addHandlerAddNewReview(this._handleAddNewReview);
     boundaryDialog.addHandlerUpdateStars(this._handleUpdateStars);
     boundaryDialog.addHandlerUploadImage();
+    boundaryDialog.addHandlerCloseDialog();
   }
 
-  _handleSelectLocation() {}
+  _handleSelectLocation(lat, lng) {
+    console.log('handle select location');
+    map.addMarker(lat, lng);
+  }
 
   async _handleLoadAllRoutes() {
     await retrieveRoutesFromDB();
@@ -96,6 +108,7 @@ class ControllerBrowse extends Controller {
       alert('Invalid input. Please enter a valid duration.');
       return;
     }
+
     try {
       await addNewReview(numStars, comment, duration, img, false);
     } catch (err) {
@@ -129,14 +142,15 @@ class ControllerBrowse extends Controller {
       return;
     }
 
-    const routeFounded = findRouteByID(id);
+    const currentRoute = getCurrentRoute();
 
     if (mode === 'add') {
-      await addRouteToDB(routeFounded, userID);
+      await addRouteToDB(currentRoute, userID);
       window.location.href = 'myRuns.html';
       return;
     }
 
+    const routeFounded = findRouteByID(id);
     if (mode === 'fav') {
       addFavRoute(routeFounded);
 
@@ -161,6 +175,7 @@ class ControllerBrowse extends Controller {
    * @private
    */
   async _handleSubmitSearch([lat, lng], minRatings, distance, terrain) {
+    // boundaryBrowse.renderSpinner();
     await retrieveRoutesFromDB();
     // pretend this function checks for nearby routes
     // map._addMarker([lat, lng]);
@@ -172,7 +187,7 @@ class ControllerBrowse extends Controller {
       console.error('not routes filtered');
       return;
     }
-    boundaryBrowse.render(filteredRoutes);
+    await boundaryBrowse.render(filteredRoutes);
   }
 }
 

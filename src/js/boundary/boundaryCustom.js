@@ -1,7 +1,6 @@
 import Boundary from './boundary';
 import map from './map';
 import { addHandlerInputAutoComplete } from '../helper';
-import { doc } from 'firebase/firestore';
 
 /**
  * Represents a custom boundary for handling user inputs and interactions in the application.
@@ -157,6 +156,11 @@ class BoundaryCustom extends Boundary {
         try {
           const start = this._startInputResult.getPlace().geometry.location;
           const end = this._endInputResult.getPlace().geometry.location;
+
+          if (!start || !end)
+            throw new Error(
+              'invalid address. Please use location provided in dropbox'
+            );
 
           map._drawRoute(
             map._translateCoordsToWaypoints(

@@ -3,7 +3,7 @@
  * @class
  */
 export default class Boundary {
-   /**
+  /**
    * Constructs a new Boundary instance.
    * @param {HTMLElement} parentEl - The parent element where the content will be rendered.
    */
@@ -11,6 +11,12 @@ export default class Boundary {
   _data;
   _errorMsg = 'something went wrong when fetching data';
   _msg = 'Default message';
+  _spinner =
+    '<div class="custom-loader__container"><div class="custom-loader"></div></div>';
+
+  addHandlerLogout(handler) {
+    document.getElementById('logout').addEventListener('click', handler);
+  }
 
   /**
    * Renders the data received from an API call.
@@ -34,7 +40,7 @@ export default class Boundary {
    */
   renderSpinner() {
     this._clear();
-    this._parentEl.insertAdjacentHTML('afterbegin', spinner);
+    this._parentEl.insertAdjacentHTML('afterbegin', this._spinner);
   }
 
   /**

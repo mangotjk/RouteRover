@@ -31,15 +31,23 @@ class ControllerIndex extends Controller {
    * @private
    */
   async _handleLogin(enteredEmail, enteredPassword) {
-    const userID = await loginUser(enteredEmail, enteredPassword);
-    const username = enteredEmail.split('@')[0];
+    let userID, username;
+
+    if (enteredEmail.trim() === '' || enteredPassword.trim() === '') {
+      window.alert('Please enter both email and password');
+      return;
+    }
+
+    try {
+      userID = await loginUser(enteredEmail, enteredPassword);
+      username = enteredEmail.split('@')[0];
+    } catch (err) {
+      window.alert(err.message);
+      return;
+    }
 
     setUserDetails(userID, username);
-    window.location.href = './html/home.html';
-    try {
-    } catch (err) {
-      alert('Invalid email or password');
-    }
+    window.location.href = '/html/home.html';
   }
 }
 

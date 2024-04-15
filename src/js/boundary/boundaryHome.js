@@ -1,7 +1,7 @@
 import Boundary from './boundary';
 import icon from 'url:../../img/sprite.svg';
-import urbanImg from 'url:../../img/route/urban_route.jpeg';
-import trailImg from 'url:../../img/route/trail_route.jpeg';
+import trail_routes from 'url:../../img/route/trail_route.jpeg';
+import { getRouteImg } from '../http';
 
 /**
  * Class representing a boundary for home routes.
@@ -16,25 +16,40 @@ class BoundaryHome extends Boundary {
     /** @type {HTMLElement} */
     this._parentEl = document.querySelector('.content__routes');
     /** @type {string} */
-    this._msg =
-      'You have no favourite routes yet. Click "Custom" to create a new route.';
+    this._msg = `<div class="window window--heading">No routes found. Start create route in Custom!</div>`;
+    this._errorMsg = `<div class="window window--heading">Unable to load routes. Please refresh this page or try again later.</div>`;
   }
 
   /**
    * Render the routes based on the provided data.
    * @param {Array} data - The data to render.
    */
-  render(data) {
+  async render(data) {
     if (!data) {
       return this.renderError();
     }
     this._data = data;
     if (data.length == 0) return this.renderMsg();
     this._clear();
-    this._parentEl.insertAdjacentHTML(
-      'beforeEnd',
-      this._generateMarkups(this._data)
-    );
+    this.renderSpinner();
+    // await new Promise(resolve => setTimeout(resolve, 2000));
+    let imgUrls;
+    try {
+      imgUrls = await Promise.all(
+        this._data.map(route =>
+          getRouteImg(route.reviews[0] ? route.reviews[0].imgUrl : null)
+        )
+      );
+    } catch (err) {
+      console.error('cannot load images');
+    }
+    if (imgUrls) {
+      this._data.forEach((route, i) => {
+        route.imgUrl = imgUrls[i];
+      });
+    }
+    this._clear();
+    this._parentEl.insertAdjacentHTML('beforeEnd', this._generateMarkups());
   }
 
   /**
@@ -76,7 +91,7 @@ class BoundaryHome extends Boundary {
     return `<div class="route window" data-id=${data.id}>
           <div class="route__header">
             <img
-              src="${data.terrain === 'Urban' ? urbanImg : trailImg}"
+              src="${data.imgUrl || trail_routes}"
               alt="route thumbnail image"
               class="route__img"
             />

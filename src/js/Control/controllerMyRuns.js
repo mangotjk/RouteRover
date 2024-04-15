@@ -6,6 +6,7 @@ import {
   findRouteByID,
   addFavRoute,
   getUserID,
+  getUserName,
   retrieveRoutesFromDB,
   addNewReview,
   state,
@@ -29,6 +30,13 @@ class ControllerMyRuns extends Controller {
    * @private
    */
   _init() {
+    try {
+      getUserID();
+    } catch (err) {
+      window.alert('Please Log In!');
+      location.href = 'index.html';
+    }
+    boundaryMyRuns.addHandlerLogout(this._handleLogout);
     boundaryMyRuns.addHandlerRenderAvailableRoutes(this._controlRender);
     boundaryMyRuns.addHandlerSelectRoute(this._controlSelectRoute);
     this._initDialog();
@@ -61,8 +69,9 @@ class ControllerMyRuns extends Controller {
       alert('Invalid input. Please enter a valid duration.');
       return;
     }
+
     try {
-      await addNewReview(numStars, comment, duration, img, false);
+      await addNewReview(numStars, comment, duration, img);
     } catch (err) {
       alert('Error adding review. Please try again later.');
     }
@@ -87,7 +96,7 @@ class ControllerMyRuns extends Controller {
   _controlRender = async function (filter) {
     const userID = getUserID();
     await retrieveRoutesFromDB(userID);
-    boundaryMyRuns.render(getCustomRoutes(), filter);
+    await boundaryMyRuns.render(getCustomRoutes(), filter, getUserName());
   };
 
   /**
@@ -111,7 +120,13 @@ class ControllerMyRuns extends Controller {
     }
 
     if (mode === 'fav') {
-      await addFavRoute(routeFounded);
+      try {
+        await addFavRoute(routeFounded);
+        window.alert('Route added to favorites!');
+        window.location.reload();
+      } catch (err) {
+        window.alert(err.message);
+      }
       return;
     }
     boundaryMyRuns.renderRoute(routeFounded);

@@ -7,6 +7,7 @@ import {
   updateUserReviewedToDatabase,
 } from '../http';
 import { formatDurationToSec, calculateDistance } from '../helper';
+import { MAX_SEARCH_DISTANCE_KM } from '../config';
 
 export const locations = [
   {
@@ -18,8 +19,24 @@ export const locations = [
     latlng: `1.34767,103.68093`,
   },
   {
-    title: `Hall Residence 2`,
+    title: `Hall 2 - Block 1`,
     latlng: `1.34798,103.68606`,
+  },
+  {
+    title: `Fine Food @ South Spine`,
+    latlng: `1.34246,103.68238`,
+  },
+  {
+    title: `Saraca, Tamarind Halls Canteen`,
+    latlng: `1.35485,103.68488`,
+  },
+  {
+    title: `NTU Hall 12`,
+    latlng: `1.35179,103.68056`,
+  },
+  {
+    title: `Gaia - Nanyang Business School`,
+    latlng: `1.34213,103.68334`,
   },
 ];
 
@@ -80,6 +97,7 @@ export const getAllRoutes = function (numRoutes) {
   let filteredAllRoutes = allRoutes.filter(
     route => route.creator !== getUserName()
   );
+  filteredAllRoutes = filteredAllRoutes.sort(() => Math.random() - 0.5);
   return filteredAllRoutes.slice(0, numRoutes);
 };
 
@@ -147,6 +165,10 @@ export function updateState(newRoute) {
 export function clearCurrentRoute() {
   state.currentRoute = null;
   saveStateToLocalStorage();
+}
+
+export function getCurrentRoute() {
+  return state.currentRoute;
 }
 
 /**
@@ -224,7 +246,8 @@ export async function addNewReview(
     return;
   }
   const username = getUserName();
-  route.reviews.unshift({ rating, comment, duration, username });
+  const imgUrl = 'images/' + route.id + '_' + username + '.jpg';
+  route.reviews.unshift({ rating, comment, duration, username, imgUrl });
   route.ratings = calculateAverageRating(route.reviews);
   route.duration = calculateAverageDuration(route.reviews);
   route.leaderboard.push({ username, duration });
@@ -232,7 +255,7 @@ export async function addNewReview(
     (a, b) => formatDurationToSec(a.duration) - formatDurationToSec(b.duration)
   );
 
-  if (!saveToMyRuns) {
+  if (saveToMyRuns) {
     await updateUserReviewedToDatabase(route, getUserID(), duration);
   }
   await addReviewToDatabase(route, img, username);
@@ -256,7 +279,8 @@ export async function filterRoutes(
   if (!allRoutes) return;
   let filteredRoutes = allRoutes.filter(route => {
     if (route.ratings < minRatings) return false;
-    if (route.distance > distance) return false;
+    if (+distance < MAX_SEARCH_DISTANCE_KM && +route.distance > +distance)
+      return false;
     if (terrain !== 'Any' && route.terrain !== terrain) return false;
     if (getUserName() === route.creator) return false;
 
@@ -282,13 +306,21 @@ export async function filterRoutes(
   return filteredRoutes;
 }
 
+export function logout() {
+  localStorage.clear();
+}
+
 /**
  * Adds a route to the favorite routes.
  * @param {Object} route - The route to add.
  */
 // not used
 export async function addFavRoute(route) {
-  await updateFavRouteToDatabase(route, getUserID());
+  try {
+    await updateFavRouteToDatabase(route, getUserID());
+  } catch (err) {
+    throw new Error(err.message);
+  }
 }
 
 /**

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="description"
-      content="Omnifood is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
+      content="Route Rover. A platform for runners to share and discover routes."
     />
 
     <!-- Always include this line of code!!! -->
@@ -69,11 +69,9 @@
             </li>
           </ul>
         </nav>
-        <a
-          href="../index.html"
-          class="btn btn--secondary btn--round btn--logout"
-          >Log Out</a
-        >
+        <button class="btn btn--secondary btn--round btn--logout" id="logout">
+          Log Out
+        </button>
       </div>
     </sidebar>
 
@@ -105,94 +103,87 @@
                 id="user-input__area"
                 class="user-input__area mb-md user-input"
               />
-              <div class="user-input__result"></div>
+              <div class="user-input__result container--scrollable"></div>
               <div class="user-input__setting">
-                <label
-                  for="user-input__rating"
-                  class="user-input__label user-input__label--setting"
-                  ><span>Ratings (min)</span>
-                  <span id="rating" class="user-input__label--content"
-                    >0</span
-                  ></label
-                >
-                <input
-                  type="range"
-                  name="rating"
-                  class="user-input__setting__input rating"
-                  id="user-input__rating"
-                  min="0"
-                  max="5"
-                  step="0.5"
-                  value="5"
-                  onchange="changeDisplayValue(this.value,this,true)"
-                  onmousemove="changeDisplayValue(this.value,this,true)"
-                />
-                <p class="te">Terrain</p>
-                <div class="user-input__radio-group">
-                  <input
-                    type="radio"
-                    class="user-input__input--radio"
-                    name="terrain"
-                    value="Urban"
-                    id="user-input-urban"
-                    checked
-                  />
+                <div>
                   <label
-                    for="user-input-urban"
-                    class="user-input__label user-input__label--radio"
-                    >Urban</label
+                    for="user-input__rating"
+                    class="user-input__label user-input__label--setting"
+                    ><span>Ratings (min)</span>
+                    <span id="rating" class="user-input__label--content"
+                      >0</span
+                    ></label
                   >
                   <input
-                    type="radio"
-                    class="user-input__input--radio"
-                    name="terrain"
-                    value="Trail"
-                    id="user-input-trail"
-                  /><label
-                    for="user-input-trail"
-                    class="user-input__label--radio"
-                    >Trail</label
-                  >
+                    type="range"
+                    name="rating"
+                    class="user-input__setting__input rating"
+                    id="user-input__rating"
+                    min="0"
+                    max="5"
+                    step="0.5"
+                    value="5"
+                    onchange="changeDisplayValue(this.value,this,true)"
+                    onmousemove="changeDisplayValue(this.value,this,true)"
+                  />
                 </div>
-                <label
-                  for="user-input__distance"
-                  class="user-input__label user-input__label--setting"
-                  ><span>Run Distance (km)</span
-                  ><span id="distance" class="user-input__label--content"
-                    >5.0</span
-                  ></label
-                >
-                <input
-                  type="range"
-                  class="user-input__setting__input distance"
-                  id="user-input__distance"
-                  value="5.0"
-                  min="0.5"
-                  max="30"
-                  step="0.5"
-                  onchange="changeDisplayValue(this.value,this)"
-                  onmousemove="changeDisplayValue(this.value,this)"
-                />
-                <label
-                  for="user-input__elevation"
-                  class="user-input__label user-input__label--elevation"
-                  ><span>Elevation (m)</span
-                  ><span id="elevation" class="user-input__label--content"
-                    >5.0</span
-                  ></label
-                >
-                <input
-                  type="range"
-                  class="user-input__setting__input elevation"
-                  id="user-input__elevation"
-                  min="0.5"
-                  max="10"
-                  step="0.5"
-                  value="5.0"
-                  onchange="changeDisplayValue(this.value,this)"
-                  onmousemove="changeDisplayValue(this.value,this)"
-                />
+
+                <div>
+                  <label
+                    for="user-input__distance"
+                    class="user-input__label user-input__label--setting"
+                    ><span>Run Distance (km)</span
+                    ><span id="distance" class="user-input__label--content"
+                      >2.0</span
+                    ></label
+                  >
+                  <input
+                    type="range"
+                    class="user-input__setting__input distance"
+                    id="user-input__distance"
+                    value="2.0"
+                    min="0.5"
+                    max="30"
+                    step="0.5"
+                    onchange="changeDisplayValue(this.value,this)"
+                    onmousemove="changeDisplayValue(this.value,this)"
+                  />
+                </div>
+                <div>
+                  <p class="te">Terrain</p>
+                  <div class="user-input__radio-group">
+                    <input
+                      type="radio"
+                      class="user-input__input--radio"
+                      name="terrain"
+                      value="Urban"
+                      id="user-input-urban"
+                      checked
+                    />
+                    <label
+                      for="user-input-urban"
+                      class="user-input__label user-input__label--radio"
+                      >Urban</label
+                    >
+                    <input
+                      type="radio"
+                      class="user-input__input--radio"
+                      name="terrain"
+                      value="Trail"
+                      id="user-input-trail"
+                    /><label
+                      for="user-input-trail"
+                      class="user-input__label--radio"
+                      >Trail</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <p class="mb-xs">Difficulty</p>
+                  <p id="difficulty">Easy</p>
+                </div>
               </div>
+
               <button class="user-input__search-btn btn" id="browse-search-btn">
                 Search
               </button>
@@ -206,6 +197,7 @@
         </div>
       </div>
       <dialog class="dialog hidden">
+        <button class="dialog__close" id="close-button">x</button>
         <h2 class="h-2">How was your experience?</h2>
         <div class="stars"></div>
         <div class="input-field--dialog">
@@ -223,9 +215,7 @@
           </div>
 
           <div>
-            <label for="upload-image" id="upload-image-label"
-              >Upload an image</label
-            >
+            <label for="upload-image" id="upload-label">Upload an image</label>
             <input
               class="mb-sm"
               type="file"
@@ -253,6 +243,33 @@
         el.previousElementSibling.querySelector(
           '.user-input__label--content'
         ).innerHTML = parseFloat(revert ? 5 - value : value).toFixed(1);
+
+        if (!revert) {
+          const diff = document.getElementById('difficulty');
+          diff.className = '';
+          if (value <= 2.5) {
+            diff.innerHTML = 'Easy';
+            return;
+          }
+          if (value <= 8) {
+            diff.innerHTML = 'Medium';
+            diff.className = 'med';
+            return;
+          }
+          if (value <= 15) {
+            diff.innerHTML = 'Hard';
+            diff.className = 'hard';
+            return;
+          }
+          diff.innerHTML = 'Expert';
+          diff.className = 'expert';
+
+          if (value >= 30) {
+            el.previousElementSibling.querySelector(
+              '.user-input__label--content'
+            ).innerHTML = 'MAX';
+          }
+        }
       }
     </script>
   </body>

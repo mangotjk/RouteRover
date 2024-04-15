@@ -1,6 +1,8 @@
 import Boundary from './boundary';
 import icon from 'url:../../img/sprite.svg';
 import { addHandlerInputAutoComplete, generateStars } from '../helper';
+import { getRouteImg } from '../http';
+import trail_routes from 'url:../../img/route/trail_route.jpeg';
 
 /**
  * Represents a boundary component for browsing routes in a web app.
@@ -18,6 +20,9 @@ class BoundaryBrowse extends Boundary {
   _userLocationLatLng;
   _searchBtn = document.getElementById('browse-search-btn');
   _msg = `<div class="window window--header mb-md">
+  <h2 class="h-2">Search Results</h2>
+</div>
+  <div class="window window--header mb-md">
   <p>No Routes Found</p>
 </div>`;
 
@@ -30,7 +35,7 @@ class BoundaryBrowse extends Boundary {
    * @param {Array} data - The data to be rendered.
    * @param {boolean} fromHome - Indicates if the data is from the home page.
    */
-  render(data, fromHome = false) {
+  async render(data, fromHome = false) {
     if (!data) {
       return this.renderError();
     }
@@ -40,8 +45,12 @@ class BoundaryBrowse extends Boundary {
 
     if (fromHome) {
       content = this._generateMarkupWithSelectedRoute(this._data);
-    } else [(content = this._generateMarkups(this._data))];
+    } else {
+      this.renderSpinner();
+      content = await this._generateMarkups(this._data);
+    }
 
+    this._clear();
     if (this._data.length == 0) return this.renderMsg();
     this._parentEl.insertAdjacentHTML('beforeend', content);
   }
@@ -117,9 +126,11 @@ class BoundaryBrowse extends Boundary {
         });
         target.classList.add('user-input__result__option--active');
         const targetDataAttr = target.dataset.location;
+
         if (targetDataAttr === 'location') {
           if (this._userLocationLatLng) {
             this._locationOptionData = this._userLocationLatLng;
+            handler(+this._locationOptionData[0], +this._locationOptionData[1]);
             return;
           } else {
             navigator.geolocation.getCurrentPosition(
@@ -128,18 +139,19 @@ class BoundaryBrowse extends Boundary {
                 lng = position.coords.longitude;
                 this._locationOptionData = [lat, lng];
                 this._userLocationLatLng = [lat, lng];
+                handler(+lat, +lng);
               },
               err => {
                 alert('Unable to locate');
               }
             );
           }
-          this._areaInput.value = 'your location';
+          this._areaInput.value = 'Use your current location';
         } else {
           [lat, lng] = targetDataAttr.split(',');
           this._areaInput.value = target.textContent.trim();
           this._locationOptionData = [lat, lng];
-          // handler([+lat, +lng]);
+          handler(+lat, +lng);
         }
       }.bind(this)
     );
@@ -231,7 +243,7 @@ class BoundaryBrowse extends Boundary {
    */
   _generateMarkupWithSelectedRoute(data) {
     return `
-        <button class="btn btn--outline btn--back" id="stop-running-btn">Back</button>
+        <button class="window window--button" id="stop-running-btn">Back</button>
         <div class="route route--browse-result window" data-id=${data.id}>
           <div class="route__header">
             <h4 class="h-4 route__heading">${
@@ -269,7 +281,7 @@ class BoundaryBrowse extends Boundary {
             })
             .join('')}
           </ul>
-          <button class="btn btn--secondary btn--small btn--start-running mb-sm">Start Running</button>
+          <button class="btn btn--secondary btn--small btn--add-to-my-run mb-sm">Add to My Runs</button>
           <div class="route__content">
           <div class="route__item">
               <svg class="route__item__icon">
@@ -325,10 +337,14 @@ class BoundaryBrowse extends Boundary {
    * Generates HTML markup for all the routes in the search results.
    * @returns {string} The HTML markup for all the routes.
    */
-  _generateMarkups() {
-    return `<div class="window window--header mb-md">
+  async _generateMarkups() {
+    let content = `<div class="window window--header mb-md">
     <h2 class="h-2">Search Results</h2>
-  </div> ${this._data.map(dt => this._generateMarkup(dt)).join('')}`;
+  </div>`;
+    for (const route of this._data) {
+      content += await this._generateMarkup(route);
+    }
+    return content;
   }
 
   /**
@@ -336,7 +352,19 @@ class BoundaryBrowse extends Boundary {
    * @param {Object} data - The data object containing information about the route.
    * @returns {string} The HTML markup for the route item.
    */
-  _generateMarkup(data) {
+  async _generateMarkup(data) {
+    let imgUrls;
+    try {
+      imgUrls = await Promise.all(
+        data.reviews.map(rev => getRouteImg(rev.imgUrl ? rev.imgUrl : null))
+      );
+    } catch (err) {
+      console.error('cannot load images');
+    }
+    data.reviews.forEach((rev, i) => {
+      rev.imgUrl = imgUrls[i];
+    });
+
     return `<div class="route route--browse-result window" data-id=${data.id}>
           <div class="route__header">
             <h4 class="h-4 route__heading">${
@@ -352,12 +380,21 @@ class BoundaryBrowse extends Boundary {
             data.reviews
               .map(
                 review => `<div class="route__comment__box">
-                <svg class="route__item__icon">
-                  <use xlink:href="${icon}#icon-profile-male"></use>
-                </svg>
-                <span class="route__comment__name">${
-                  review.username || 'Anonymous'
-                }</span>
+                <div class="comment__header">
+                  <img
+                    src="${review.imgUrl || trail_routes}"
+                    alt="route thumbnail image"
+                    class="route__img route__img--small"
+                  />
+                  <p>
+                    <svg class="route__item__icon">
+                      <use xlink:href="${icon}#icon-profile-male"></use>
+                    </svg>
+                    <span class="route__comment__name">${
+                      review.username || 'Anonymous'
+                    }</span>
+                  </p>
+                </div>
                 <p class="route__comment__text mt-sm">"${review.comment}"</p>
               </div>`
               )

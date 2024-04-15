@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="description"
-      content="Omnifood is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
+      content="Route Rover. A platform for runners to share and discover routes."
     />
 
     <!-- Always include this line of code!!! -->
@@ -68,26 +68,27 @@
             </li>
           </ul>
         </nav>
-        <a
-          href="../index.html"
-          class="btn btn--secondary btn--round btn--logout"
-          >Log Out</a
-        >
+        <button class="btn btn--secondary btn--round btn--logout" id="logout">
+          Log Out
+        </button>
       </div>
     </sidebar>
 
     <main class="main__content">
       <div class="container container--scrollable">
-        <div class="window window--header mb-md">
-          <h2 class="h-2">History</h2>
-        </div>
         <div>
           <select id="myruns-filter" name="myruns-filter" class="">
             <option value="all">All Routes</option>
             <option value="reviewed">Reviewed Routes</option>
             <option value="unreviewed">Unreviewed Routes</option>
+            <option value="favourited">Favourited Routes</option>
+            <option value="created">Created Routes</option>
           </select>
         </div>
+        <div class="window window--header mb-md">
+          <h2 class="h-2">History</h2>
+        </div>
+
         <div id="routes"></div>
       </div>
       <div class="container">
@@ -97,14 +98,7 @@
       </div>
 
       <dialog class="dialog hidden">
-        <button class="" id="close-button" style="position: absolute;
-        top: 3px;
-        right: 5px;
-        padding: 8px;
-        background-color: transparent;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;">X</button>
+        <button class="dialog__close" id="close-button">x</button>
         <h2 class="h-2">How was your experience?</h2>
         <div class="stars"></div>
         <div class="input-field--dialog">

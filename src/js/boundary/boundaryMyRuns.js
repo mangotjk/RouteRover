@@ -2,6 +2,8 @@ import Boundary from './boundary';
 import icon from 'url:../../img/sprite.svg';
 import map from '../boundary/map';
 import { formatDuration, generateStars } from '../helper';
+import { getRouteImg } from '../http';
+import trail_routes from 'url:../../img/route/trail_route.jpeg';
 
 /**
  * Class representing a boundary for the "My Runs" page.
@@ -11,7 +13,8 @@ class BoundaryMyRuns extends Boundary {
   /** @type {HTMLElement} */
   _parentEl = document.getElementById('routes');
   /** @type {string} */
-  _msg = 'No history route found.  Start running now!';
+  _msg =
+    '<div class="window window--heading">No history route found.  Start running now!</div>';
 
   /**
    * Create a BoundaryMyRuns.
@@ -25,32 +28,49 @@ class BoundaryMyRuns extends Boundary {
    * Render the routes based on the provided data.
    * @param {Array} data - The data to render.
    */
-  render(data, filter) {
+  async render(data, filter, userName) {
     if (!data) {
       return this.renderError();
     }
-  
+
+    this.renderSpinner();
+    // await new Promise(resolve => setTimeout(resolve, 2000));
+
     switch (filter) {
       case 'all':
         this._data = data;
         break;
       case 'reviewed':
-        this._data = data.filter(route => route.reviewed===true);
+        this._data = data.filter(route => route.reviewed === true);
         break;
       case 'unreviewed':
-        this._data = data.filter(route => route.reviewed!==true);
+        this._data = data.filter(route => route.reviewed !== true);
+        break;
+      case 'favourited':
+        this._data = data.filter(route => route.fav === true);
+        break;
+      case 'created':
+        this._data = data.filter(route => route.creator === userName);
         break;
       default:
         this._data = data;
     }
     // console.log(this._data.length + ' routes displayed');
-    
+
     if (this._data.length == 0) return this.renderMsg();
     this._clear();
     this._parentEl.insertAdjacentHTML(
       'afterBegin',
-      this._generateMarkups(this._data)
+      await this._generateMarkups(this._data)
     );
+  }
+
+  async _generateMarkups() {
+    let content = ``;
+    for (const route of this._data) {
+      content += await this._generateMarkup(route);
+    }
+    return content;
   }
 
   /**
@@ -59,9 +79,11 @@ class BoundaryMyRuns extends Boundary {
    */
   addHandlerRenderAvailableRoutes(handler) {
     window.onload = handler('all');
-    document.getElementById('myruns-filter').addEventListener('change', function(e) {
-      window.onload = handler(e.target.value);
-    });
+    document
+      .getElementById('myruns-filter')
+      .addEventListener('change', function (e) {
+        window.onload = handler(e.target.value);
+      });
   }
 
   /**
@@ -103,19 +125,36 @@ class BoundaryMyRuns extends Boundary {
    * @param {object} data - The data of the route.
    * @returns {string} - The HTML markup for the route.
    */
-  _generateMarkup(data) {
+  async _generateMarkup(data) {
     let reviewInterface;
+
     if (data.reviewed) {
+      const imgUrls = await Promise.all(
+        data.reviews.map(rev => getRouteImg(rev.imgUrl))
+      );
+      data.reviews.forEach((rev, i) => {
+        rev.imgUrl = imgUrls[i];
+      });
+
       reviewInterface = data.reviews
         .map(
           review => `
       <div class="route__comment__box">
-        <svg class="route__item__icon">
-          <use xlink:href="${icon}#icon-profile-male"></use>
-        </svg>
-        <span class="route__comment__name">${
-          review.username || 'Anonymous'
-        }</span>
+      <div class="comment__header">
+        <img
+          src="${review.imgUrl || trail_routes}"
+          alt="route thumbnail image"
+          class="route__img route__img--small"
+        />
+        <p>
+          <svg class="route__item__icon">
+            <use xlink:href="${icon}#icon-profile-male"></use>
+          </svg>
+          <span class="route__comment__name">${
+            review.username || 'Anonymous'
+          }</span>
+        </p>
+    </div>
         <div class="rating">
           ${generateStars(review.rating, 'route__item__icon')}
           <span>(${(+review.rating).toFixed(1)})</span>

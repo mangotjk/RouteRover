@@ -16,6 +16,18 @@
   color: $font-color-default;
   text-align: center;
 
+  &__close {
+    position: absolute;
+    color: currentColor;
+    top: 3px;
+    right: 13px;
+    padding: 8px;
+    background-color: transparent;
+    border: none;
+    font-size: $font-lg;
+    cursor: pointer;
+  }
+
   .h-2 {
     margin-bottom: $spacing * 0.5;
   }

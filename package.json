@@ -1,6 +1,6 @@
 {
   "name": "sc2006_project",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "SC2006 Group Project",
   "default": "index.html",
   "scripts": {
@@ -24,6 +24,7 @@
   "dependencies": {
     "firebase": "^10.10.0",
     "leaflet": "^1.9.4",
-    "leaflet-routing-machine": "^3.2.12"
+    "leaflet-routing-machine": "^3.2.12",
+    "chart.js": "^4.0.0"
   }
 }
