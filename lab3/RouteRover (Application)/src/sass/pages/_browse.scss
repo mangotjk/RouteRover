@@ -1,0 +1,32 @@
+.main__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  .content {
+    padding: 3rem 2dvw;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $spacing * 2;
+      align-items: center;
+    }
+  }
+
+  #start-running-btn {
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+.map__container {
+  padding: 2rem;
+  width: 100%;
+
+  #map {
+    border-radius: 2rem;
+    height: 100%;
+    border: solid 2px $font-color-default;
+  }
+}

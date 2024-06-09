@@ -1,0 +1,60 @@
+.window {
+  border: solid 1px #000;
+  border-radius: 3rem;
+
+  color: $font-color-default;
+
+  padding: $spacing * 2 $spacing * 3;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.6);
+
+  box-shadow: $shadow-light;
+
+  &--button {
+    font-size: $font-md;
+    padding: 1rem 2rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    margin-bottom: $spacing * 2;
+    box-shadow: $shadow-light;
+    cursor: pointer;
+  }
+
+  &--map {
+    padding: 1rem;
+    height: 100%;
+  }
+
+  &--fullHeight {
+    height: 100%;
+  }
+
+  &--dark {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  &--sidebar {
+    height: 100%;
+    display: block;
+    color: #fff;
+    text-align: center;
+
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: $shadow-medium;
+    border-radius: 0 2rem 2rem 0;
+
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    row-gap: 2rem;
+  }
+
+  &--header {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: center;
+    box-shadow: $shadow-medium;
+  }
+}

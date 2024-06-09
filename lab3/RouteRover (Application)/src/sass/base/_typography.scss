@@ -1,0 +1,53 @@
+%headings {
+  font-family: $font-family-display;
+}
+
+.heading--primary {
+  @extend %headings;
+
+  &--main {
+    text-transform: uppercase;
+    font-size: 5rem;
+    display: block;
+    letter-spacing: 2.7rem;
+    animation: moveInFromLeft ease-out 1s;
+    backface-visibility: hidden;
+  }
+  &--sub {
+    display: block;
+    font-weight: 300;
+    letter-spacing: 1.4rem;
+    animation: moveInFromRight ease-out 1s;
+    margin-bottom: 3rem;
+  }
+}
+
+.h-1 {
+  @extend %headings;
+  font-weight: 700;
+  font-size: $font-xxl;
+  letter-spacing: 0.15rem;
+  line-height: 1.4;
+}
+
+.h-2 {
+  @extend %headings;
+  font-weight: 700;
+  font-size: $font-lg;
+  letter-spacing: 0.1rem;
+}
+
+.h-3 {
+  @extend %headings;
+  font-size: $font-lg;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+}
+
+.h-4 {
+  @extend %headings;
+  font-weight: 500;
+  font-size: $font-lg;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}

@@ -1,0 +1,109 @@
+.route {
+  // border: 2px solid $secondary;
+  border-radius: 2rem;
+  // background-image: url('../../img/route/alex-siale-qH36EgNjPJY-unsplash.jpg');
+  background-color: $secondary-light;
+  padding: 1rem 2rem;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 2rem;
+
+  &__img {
+    border-radius: 50%;
+    width: 100%;
+  }
+  &__heading {
+    text-align: center;
+  }
+  &__content {
+    display: grid;
+    place-items: end;
+  }
+  &__item {
+    align-items: center;
+    &__wrapper {
+      display: block;
+    }
+    &--bold {
+      font-weight: 500;
+    }
+    &__details {
+      font-size: $font-md;
+      display: inline-block;
+      color: $font-color-default;
+      font-weight: 400;
+    }
+    &__icon {
+      @extend %icon;
+      fill: $tertiary;
+
+      &--tool {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &--browse-result,
+  &--my-run {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing;
+
+    .route {
+      &__header {
+        display: flex;
+        justify-content: space-between;
+      }
+      &__content {
+        display: flex;
+        justify-content: center;
+        gap: $spacing;
+      }
+      &__item {
+        &__details {
+          font-size: $font-sm;
+        }
+        &__icon {
+          margin-right: $spacing * 0.2;
+        }
+      }
+
+      &__comment {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        gap: $spacing;
+        margin-bottom: $spacing;
+
+        &__box {
+          border: solid 1px currentColor;
+          border-radius: 0.2rem;
+          display: inline-block;
+          padding: 0 $spacing $spacing;
+          min-width: max-content;
+        }
+        &__text {
+          margin-top: $spacing * 0.5;
+        }
+      }
+    }
+    .rating {
+      margin-top: -0.5rem;
+      margin-bottom: $spacing;
+    }
+  }
+
+  &--my-run {
+    .route {
+      &__comment {
+        width: 100%;
+        display: block;
+        .rating {
+          margin-top: $spacing * 0.25;
+        }
+      }
+    }
+  }
+}

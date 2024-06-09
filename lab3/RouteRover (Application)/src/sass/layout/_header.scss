@@ -1,0 +1,31 @@
+.header {
+  height: 95dvh;
+  background-size: cover;
+  background-position: top;
+  color: $font-color-hero;
+  position: relative;
+
+  clip-path: polygon(0 0, 100% 0, 100% 75dvh, 0 100%);
+
+  &__logo-container {
+    width: 5rem;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+
+    .header__logo {
+      max-width: 100%;
+    }
+  }
+  &__hero-title {
+    position: absolute;
+    left: 51.5%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.7rem;
+
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+}

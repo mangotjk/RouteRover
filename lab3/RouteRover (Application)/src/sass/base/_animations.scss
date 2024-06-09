@@ -1,0 +1,47 @@
+.delay-animation {
+  animation-delay: 0.75s;
+}
+
+@keyframes moveInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX((-4rem));
+  }
+
+  80% {
+    transform: translateX((0.5rem));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX((4rem));
+  }
+
+  80% {
+    transform: translateX((-0.5rem));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY((4rem));
+  }
+
+  100% {
+    transform: translateY((0rem));
+    opacity: 1;
+  }
+}

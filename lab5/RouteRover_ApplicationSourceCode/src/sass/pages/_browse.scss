@@ -1,0 +1,17 @@
+#difficulty {
+  font-size: $font-lg;
+  font-family: $font-family-display;
+  font-weight: bold;
+
+  color: green;
+
+  &.med {
+    color: orange;
+  }
+  &.hard {
+    color: red;
+  }
+  &.expert {
+    color: purple;
+  }
+}
