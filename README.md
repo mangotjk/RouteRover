@@ -11,8 +11,8 @@ This app also allows you to track your past runs and analyse statistics.
 ## Setup
 To run this application locally, you can use the following command line commands:
 ```
-git clone https://github.com/softwarelab3/2006-MACS2-number-one
-cd 2006-MACS2-number-one/lab5/RouteRover_ApplicationSourceCode
+git clone https://github.com/mangotjk/RouteRover
+cd RouteRover/lab5/RouteRover_ApplicationSourceCode
 npm i
 npm start
 
