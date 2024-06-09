@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Route Buddy" />
+
+    <!-- Always include this line of code!!! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- <link rel="icon" href="" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" /> -->
+    <!-- <link rel="manifest" href="manifest.webmanifest" /> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/sass/main.scss" />
+    <title>Route Buddy</title>
+
+    <script type="module" src="./src/js/login.js"></script>
+    
+   
+  </head>
+  
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .login-container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <input type="text" id="username" name="username" required placeholder="Email">
+          <input type="password" id="password" name="password" required placeholder="Password">
+          <input type="submit" value="Login">
+      </form>
+      <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the default form submit action
+          loginUser(); // Call your login function
+          
+        });
+      </script>
+      
+    </div>
+    <a href="./html/home.html">
+      <button>log in</button>
+    </a>
+    
+
+</body>
+</html>
+
+
+
+

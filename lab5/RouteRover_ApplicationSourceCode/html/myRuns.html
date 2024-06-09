@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Route Rover. A platform for runners to share and discover routes."
+    />
+
+    <!-- Always include this line of code!!! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="../src/img/logos/main_logo.png" />
+    <!--<link rel="apple-touch-icon" href="img/apple-touch-icon.png" /> -->
+    <!-- <link rel="manifest" href="manifest.webmanifest" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../src/sass/main.scss" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"
+    />
+    <title>My Runs - Route Rover</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqD__gt_n0hPjXmwQkpWrR2eCp9ibUdw&loading=async&libraries=places"></script>
+    <script type="module" src="../src/js/Control/controllerMyRuns.js"></script>
+  </head>
+  <body class="body">
+    <sidebar class="sidebar">
+      <div class="window window--sidebar">
+        <h3 class="route-buddy h-3">Route Rover</h3>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <svg class="nav__icon">
+                <use xlink:href="../src/img/sprite.svg#icon-home"></use>
+              </svg>
+              <a href="./home.html" class="nav__link">Home</a>
+            </li>
+            <li class="nav__item">
+              <svg class="nav__icon">
+                <use xlink:href="../src/img/sprite.svg#icon-search"></use>
+              </svg>
+              <a href="browse.html" class="nav__link">Browse</a>
+            </li>
+            <li class="nav__item">
+              <svg class="nav__icon">
+                <use xlink:href="../src/img/sprite.svg#icon-pencil"></use>
+              </svg>
+              <a href="custom.html" class="nav__link">Custom</a>
+            </li>
+            <li class="nav__item nav__item--active">
+              <svg class="nav__icon">
+                <use xlink:href="../src/img/sprite.svg#icon-map"></use>
+              </svg>
+              <a href="myRuns.html" class="nav__link">My Runs</a>
+            </li>
+          </ul>
+        </nav>
+        <button class="btn btn--secondary btn--round btn--logout" id="logout">
+          Log Out
+        </button>
+      </div>
+    </sidebar>
+
+    <main class="main__content">
+      <div class="container container--scrollable">
+        <div>
+          <select id="myruns-filter" name="myruns-filter" class="">
+            <option value="all">All Routes</option>
+            <option value="reviewed">Reviewed Routes</option>
+            <option value="unreviewed">Unreviewed Routes</option>
+            <option value="favourited">Favourited Routes</option>
+            <option value="created">Created Routes</option>
+          </select>
+        </div>
+        <div class="window window--header mb-md">
+          <h2 class="h-2">History</h2>
+        </div>
+
+        <div id="routes"></div>
+      </div>
+      <div class="container">
+        <div class="window window--map map__container">
+          <div id="map">&nbsp;</div>
+        </div>
+      </div>
+
+      <dialog class="dialog hidden">
+        <button class="dialog__close" id="close-button">x</button>
+        <h2 class="h-2">How was your experience?</h2>
+        <div class="stars"></div>
+        <div class="input-field--dialog">
+          <div>
+            <label for="run-time">Time Taken:</label>
+            <input
+              class="mb-sm"
+              type="time"
+              id="run-time"
+              name="run-time"
+              value="00:00:00"
+              step="1"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="upload-image" id="upload-label">Upload an image</label>
+            <input
+              class="mb-sm"
+              type="file"
+              name="upload-image"
+              accept="image/*"
+              id="upload-image"
+            />
+          </div>
+        </div>
+        <!-- <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px;">
+        <br> -->
+
+        <textarea
+          type="text"
+          class="dialog__comment"
+          placeholder="Comment on your experience!"
+          id="input-comment"
+        ></textarea>
+        <button class="btn btn--secondary" id="submit-review-btn">
+          Submit
+        </button>
+      </dialog>
+    </main>
+
+    <!-- <footer class="footer"></footer> -->
+  </body>
+
+  <!-- <script src="js/app.js"></script> -->
+</html>

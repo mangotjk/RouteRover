@@ -1,0 +1,40 @@
+.default-img {
+  max-width: 100%;
+  &--round {
+    max-width: 100%;
+    border-radius: 50%;
+  }
+}
+
+.default-wrapper {
+  padding: 10rem 3rem;
+}
+
+.d-phone--none {
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.d-phone {
+  display: none;
+  @include respond(phone) {
+    display: block;
+  }
+}
+
+.mb-sm {
+  margin-bottom: $spacing;
+}
+.mb-md {
+  margin-bottom: $spacing * 2 !important;
+}
+.mb-lg {
+  margin-bottom: $spacing * 4 !important;
+}
+.mb-xl {
+  margin-bottom: $spacing * 8 !important;
+}
+.mb-xxl {
+  margin-bottom: $spacing * 16 !important;
+}

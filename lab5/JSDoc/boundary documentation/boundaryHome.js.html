@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: boundaryHome.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: boundaryHome.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Boundary from './boundary';
+import icon from 'url:../../img/sprite.svg';
+import trail_routes from 'url:../../img/route/trail_route.jpeg';
+import { getRouteImg } from '../http';
+
+/**
+ * For handling user inputs and interactions in the Home tab
+ * 
+ * @extends Boundary
+ */
+class BoundaryHome extends Boundary {
+  /**
+   * Creates a BoundaryHome instance
+   */
+  constructor() {
+    super();
+    /** @type {HTMLElement} */
+    this._parentEl = document.querySelector('.content__routes');
+    /** @type {string} */
+    this._msg = `&lt;div class="window window--heading">No routes found. Start create route in Custom!&lt;/div>`;
+    this._errorMsg = `&lt;div class="window window--heading">Unable to load routes. Please refresh this page or try again later.&lt;/div>`;
+  }
+
+  /**
+   * Render the routes based on the provided data.
+   * @param {Array} data - The data to render.
+   */
+  async render(data) {
+    if (!data) {
+      return this.renderError();
+    }
+    this._data = data;
+    if (data.length == 0) return this.renderMsg();
+    this._clear();
+    this.renderSpinner();
+    // await new Promise(resolve => setTimeout(resolve, 2000));
+    let imgUrls;
+    try {
+      imgUrls = await Promise.all(
+        this._data.map(route =>
+          getRouteImg(route.reviews[0] ? route.reviews[0].imgUrl : null)
+        )
+      );
+    } catch (err) {
+      console.error('cannot load images');
+    }
+    if (imgUrls) {
+      this._data.forEach((route, i) => {
+        route.imgUrl = imgUrls[i];
+      });
+    }
+    this._clear();
+    this._parentEl.insertAdjacentHTML('beforeEnd', this._generateMarkups());
+  }
+
+  /**
+   * Renders the username in the welcome message.
+   * @param {string} username - The username to render.
+   */
+  renderName(username) {
+    document.getElementById('user-name').innerHTML = username;
+  }
+
+  /**
+   * Add a handler to render available routes when the window loads.
+   * @param {function} handler - The handler function.
+   */
+  // render all routes in db, need to change later
+  addHandlerRenderAvailableRoutes(handler) {
+    window.onload = handler;
+  }
+
+  /**
+   * Add a handler to select a route when clicked.
+   * @param {function} handler - The handler function.
+   */
+  addHandlerSelectRoute(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      const routeEl = e.target.closest('.route');
+      if (!routeEl) return;
+      const id = +routeEl.dataset.id;
+      handler(id);
+    });
+  }
+
+  /**
+   * Generate the markup for a route item based on the provided data.
+   * @param {Object} data - The data for the route item.
+   * @returns {string} The generated markup.
+   */
+  _generateMarkup(data) {
+    return `&lt;div class="route window" data-id=${data.id}>
+          &lt;div class="route__header">
+            &lt;img
+              src="${data.imgUrl || trail_routes}"
+              alt="route thumbnail image"
+              class="route__img"
+            />
+            &lt;div class="route__left">
+              &lt;h4 class="h-4 ">${data.title}&lt;/h4>
+              &lt;p class="text-sm "> (${data.creator || 'Anonymous'})&lt;/p>
+            &lt;/div>
+              &lt;/div>
+          &lt;div class="route__content">
+            &lt;div class="route__item__wrapper">
+            &lt;div class="route__item">
+                &lt;svg class="route__item__icon">
+                  &lt;use xlink:href="${icon}#icon-users">&lt;/use>
+                &lt;/svg>
+                &lt;span class="route__item__details"
+                  >&lt;span class="route__item--bold"
+                    >${data.reviews.length}&lt;/span
+                  >
+                  &lt;/span
+                >
+              &lt;/div>
+              &lt;div class="route__item">
+                &lt;svg class="route__item__icon">
+                  &lt;use xlink:href="${icon}#icon-flag">&lt;/use>
+                &lt;/svg>
+                &lt;span class="route__item__details"
+                  >&lt;span class="route__item--bold route__item__distance"
+                    >${data.distance}&lt;/span
+                  >
+                  km&lt;/span
+                >
+              &lt;/div>
+              &lt;div class="route__item">
+                &lt;svg class="route__item__icon">
+                  &lt;use xlink:href="${icon}#icon-area-graph">&lt;/use>
+                &lt;/svg>
+                &lt;span class="route__item__details">
+                  &lt;span class="route__item__trail">${data.terrain}&lt;/span>
+                &lt;/span>
+              &lt;/div>
+              &lt;div class="route__item">
+                &lt;svg class="route__item__icon">
+                  &lt;use xlink:href="${icon}#icon-compass2">&lt;/use>
+                &lt;/svg>
+                &lt;span class="route__item__details"
+                  >avg
+                  &lt;span class="route__item--bold route__item__time">${
+                    data.duration
+                  }&lt;/span>
+                  mins
+                &lt;/span>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>`;
+  }
+}
+
+export default new BoundaryHome();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BoundaryHome.html">BoundaryHome</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Apr 19 2024 18:44:49 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

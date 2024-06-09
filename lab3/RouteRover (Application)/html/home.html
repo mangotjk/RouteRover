@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Omnifood is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
+    />
+
+    <!-- Always include this line of code!!! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- <link rel="icon" href="img/favicon.png" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" /> -->
+    <!-- <link rel="manifest" href="manifest.webmanifest" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../src/sass/main.scss" />
+    <title>Home - Route Buddy</title>
+    <script type="module" src="../src/js/Control/controllerHome.js"></script>
+  </head>
+  <body class="body">
+    <sidebar class="sidebar">
+      <h3 class="route-buddy h-3">Route Buddy</h3>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item nav__item--active">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-home"></use>
+            </svg>
+            <a href="#" class="nav__link">Home</a>
+          </li>
+          <li class="nav__item">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-search"></use>
+            </svg>
+            <a href="./browse.html" class="nav__link">Browse</a>
+          </li>
+          <li class="nav__item">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-pencil"></use>
+            </svg>
+            <a href="./custom.html" class="nav__link">Custom</a>
+          </li>
+          <li class="nav__item">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-map"></use>
+            </svg>
+            <a href="./myRuns.html" class="nav__link">My Runs</a>
+          </li>
+        </ul>
+      </nav>
+      <button class="btn btn--secondary btn--round logout-btn">Log Out</button>
+    </sidebar>
+
+    <main class="container">
+      <h1 class="h-1">
+        Welcome Back <span class="user-name" id="user-name">Jason</span>.
+      </h1>
+      <h2 class="h-2">Here are some specially curated routes for you.</h2>
+      <section class="content__routes"></section>
+    </main>
+
+    <!-- <footer class="footer"></footer> -->
+  </body>
+
+  <script
+    defer
+    src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+  ></script>
+  <!-- <script src="js/app.js"></script> -->
+</html>

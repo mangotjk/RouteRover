@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Omnifood is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
+    />
+
+    <!-- Always include this line of code!!! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse - Route Buddy</title>
+
+    <!-- <link rel="icon" href="img/favicon.png" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" /> -->
+    <!-- <link rel="manifest" href="manifest.webmanifest" /> -->
+    <link rel="stylesheet" href="../src/sass/main.scss" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqD__gt_n0hPjXmwQkpWrR2eCp9ibUdw&loading=async&libraries=places"></script>
+    <script type="module" src="../src/js/Control/controllerBrowse.js"></script>
+  </head>
+  <body class="body">
+    <sidebar class="sidebar">
+      <h3 class="route-buddy h-3">Route Buddy</h3>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-home"></use>
+            </svg>
+            <a href="./home.html" class="nav__link">Home</a>
+          </li>
+          <li class="nav__item nav__item--active">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-search"></use>
+            </svg>
+            <a href="browse.html" class="nav__link">Browse</a>
+          </li>
+          <li class="nav__item">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-pencil"></use>
+            </svg>
+            <a href="custom.html" class="nav__link">Custom</a>
+          </li>
+          <li class="nav__item">
+            <svg class="nav__icon">
+              <use xlink:href="../src/img/sprite.svg#icon-map"></use>
+            </svg>
+            <a href="myRuns.html" class="nav__link">My Runs</a>
+          </li>
+        </ul>
+      </nav>
+      <button class="btn btn--secondary btn--round logout-btn">Log Out</button>
+    </sidebar>
+
+    <main class="main__content">
+      <div class="content">
+        <div class="content__header">
+          <h2 class="h-2 content__header__heading">Browse by your Area</h2>
+          <button
+            class="btn btn--start-running btn--secondary btn--small hidden"
+            id="start-running-btn"
+          >
+            Start Running
+          </button>
+        </div>
+        <div class="content__wrapper">
+          <form action="submit" class="form" id="form">
+            <h2 class="h-2" id="browse-heading">Your Area</h2>
+            <input
+              type="text"
+              id="user-input__area"
+              class="user-input__area mb-md user-input"
+            />
+            <div class="user-input__result">
+              <div class="user-input__result__option">
+                <svg class="user-input__result__icon">
+                  <use xlink:href="../src/img/sprite.svg#icon-location"></use>
+                </svg>
+                <span>Use your current location</span>
+              </div>
+              <div class="user-input__result__option">
+                <svg class="user-input__result__icon">
+                  <use xlink:href="../src/img/sprite.svg#icon-location"></use>
+                </svg>
+                <span>Lee Wee Nam Library</span>
+              </div>
+              <div class="user-input__result__option">
+                <svg class="user-input__result__icon">
+                  <use xlink:href="../src/img/sprite.svg#icon-location"></use>
+                </svg>
+                <span>Hall Residence 2</span>
+              </div>
+            </div>
+            <div class="user-input__setting">
+              <label
+                for="user-input__rating"
+                class="user-input__label user-input__label--setting"
+                ><span>Ratings (min)</span>
+                <span id="rating" class="user-input__label--content"
+                  >1.5</span
+                ></label
+              >
+              <input
+                type="range"
+                name="rating"
+                class="user-input__setting__input rating"
+                id="user-input__rating"
+                min="0"
+                max="5"
+                step="0.5"
+                value="3.5"
+                onchange="changeDisplayValue(this.value,this,true)"
+                onmousemove="changeDisplayValue(this.value,this,true)"
+              />
+              <p class="te">Terrain</p>
+              <div class="user-input__radio-group">
+                <input
+                  type="radio"
+                  class="user-input__input--radio"
+                  name="terrain"
+                  value="Urban"
+                  id="user-input-urban"
+                  checked
+                />
+                <label
+                  for="user-input-urban"
+                  class="user-input__label user-input__label--radio"
+                  >Urban</label
+                >
+                <input
+                  type="radio"
+                  class="user-input__input--radio"
+                  name="terrain"
+                  value="Trail"
+                  id="user-input-trail"
+                /><label for="user-input-trail" class="user-input__label--radio"
+                  >Trail</label
+                >
+              </div>
+              <label
+                for="user-input__distance"
+                class="user-input__label user-input__label--setting"
+                ><span>Distance (km)</span
+                ><span id="distance" class="user-input__label--content"
+                  >5.0</span
+                ></label
+              >
+              <input
+                type="range"
+                class="user-input__setting__input distance"
+                id="user-input__distance"
+                value="5.0"
+                min="0.5"
+                max="10"
+                step="0.5"
+                onchange="changeDisplayValue(this.value,this)"
+                onmousemove="changeDisplayValue(this.value,this)"
+              />
+
+              <label
+                for="user-input__elevation"
+                class="user-input__label user-input__label--elevation"
+                ><span>Elevation (m)</span
+                ><span id="elevation" class="user-input__label--content"
+                  >5.0</span
+                ></label
+              >
+              <input
+                type="range"
+                class="user-input__setting__input elevation"
+                id="user-input__elevation"
+                min="0.5"
+                max="10"
+                step="0.5"
+                value="5.0"
+                onchange="changeDisplayValue(this.value,this)"
+                onmousemove="changeDisplayValue(this.value,this)"
+              />
+            </div>
+            <button class="user-input__search-btn btn" id="browse-search-btn">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="map__container">
+        <div id="map">&nbsp;</div>
+      </div>
+      <dialog class="dialog hidden">
+        <h2 class="h-2">How was your experience?</h2>
+        <div class="stars"></div>
+        <textarea
+          type="text"
+          class="dialog__comment"
+          placeholder="Comment on your experience!"
+          id="input-comment"
+        ></textarea>
+        <button class="btn btn--secondary" id="submit-review-btn">
+          Submit
+        </button>
+      </dialog>
+    </main>
+
+    <!-- <footer class="footer"></footer> -->
+    <script type="text/javascript">
+      function changeDisplayValue(value, el, revert = false) {
+        el.previousElementSibling.querySelector(
+          '.user-input__label--content'
+        ).innerHTML = parseFloat(revert ? 5 - value : value).toFixed(1);
+      }
+    </script>
+  </body>
+
+  <!-- <script src="js/app.js"></script> -->
+</html>

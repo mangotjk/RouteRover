@@ -1,0 +1,93 @@
+.dialog {
+  display: block;
+  max-height: 50dvh;
+  width: 50dvw;
+  max-width: 40rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+
+  padding: $spacing * 2;
+  border-radius: 2rem;
+  box-shadow: $shadow-medium;
+
+  color: $font-color-default;
+  text-align: center;
+
+  &__close {
+    position: absolute;
+    color: currentColor;
+    top: 3px;
+    right: 13px;
+    padding: 8px;
+    background-color: transparent;
+    border: none;
+    font-size: $font-lg;
+    cursor: pointer;
+  }
+
+  .h-2 {
+    margin-bottom: $spacing * 0.5;
+  }
+  .star {
+    width: 2.2rem;
+    height: 2.2rem;
+    fill: currentColor;
+    margin-right: 1rem;
+    margin-bottom: $spacing;
+  }
+
+  &__comment {
+    resize: none;
+    display: block;
+    width: 100%;
+    height: 8rem;
+    border-color: $font-color-default;
+    border-radius: 1rem;
+    text-indent: 0;
+    padding: $spacing * 0.5 $spacing;
+
+    margin-bottom: $spacing * 2;
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  .input-field--dialog {
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+  }
+
+  input[type='time'] {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+  }
+
+  input[type='time']:focus {
+    border-color: #66afe9;
+    outline: none;
+  }
+
+  input[type='file'] {
+    display: none;
+  }
+
+  label[for='upload-image'] {
+    display: block;
+    padding: 5px 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  label[for='upload-image']:hover {
+    background-color: #e8e8e8;
+  }
+}

@@ -1,0 +1,10 @@
+.content {
+  height: 100dvh;
+  overflow-y: scroll;
+  &__routes {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+    grid-gap: 2rem;
+  }
+}

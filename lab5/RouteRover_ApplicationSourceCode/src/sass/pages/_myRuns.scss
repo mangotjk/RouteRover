@@ -1,0 +1,14 @@
+#myruns-filter {
+  font-size: $font-md;
+  padding: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  margin-bottom: $spacing * 2;
+  box-shadow: $shadow-light;
+}
+
+#myruns-filter option {
+  padding: 10px;
+}
